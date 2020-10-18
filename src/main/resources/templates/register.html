@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+        <title>計算式登録</title>
+	</head>
+		<body>
+
+			<form action="#" th:action="@{/register}" method="post">
+                	<fieldset class="uk-fieldset">
+                		<legend>日付ID</legend>
+	                	<div>
+				            <input id="dateId" class="uk-input" type="text" placeholder="Y01" th:field="${dateFormula.dateId}"/>
+				            <p class="uk-text-danger" th:if="${#fields.hasErrors('dateFormula.dateId')}" th:errors="${dateFormula.dateId}" />
+				        </div>
+				        <legend>日付名</legend>
+	                	<div>
+				            <input id="dateName" class="uk-input" type="text" placeholder="翌月末" th:field="${dateFormula.dateName}"/>
+				            <p class="uk-text-danger" th:if="${#fields.hasErrors('dateFormula.dateName')}" th:errors="${dateFormula.dateName}" />
+				        </div>
+				        <legend>加減値(年)</legend>
+	                	<div>
+				            <input id="adjustmentYear" class="uk-input" type="text" placeholder="1" th:field="${dateFormula.adjustmentYear}"/>
+				        </div>
+				       <legend>加減値(月)</legend>
+	                	<div>
+				            <input id="adjustmentMonth" class="uk-input" type="text" placeholder="1" th:field="${dateFormula.adjustmentMonth}"/>
+				        </div>
+				        <legend>加減値(日)</legend>
+	                	<div>
+				            <input id="adjustmentDay" class="uk-input" type="text" placeholder="1" th:field="${dateFormula.adjustmentDay}"/>
+				        </div>
+				        <button id="registerButton" name="register" class="uk-button uk-button-default">登録</button>
+				        <a id="backButton" class="uk-button uk-button-default uk-align-right" href="/">戻る</a>
+				    </fieldset>
+                </form>
+
+</body>
+</html>
