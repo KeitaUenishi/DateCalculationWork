@@ -3,6 +3,7 @@ package product.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -36,6 +37,15 @@ public interface DateFormulaRepository {
 
 	@Select("SELECT * FROM dateformula WHERE dateId = #{dateId}")
 	DateFormula selectPK(String dateId);
+
+	/**
+	 * 日付計算式を新規登録
+	 *
+	 * @param formula 登録する日付計算式
+	 */
+
+	@Insert("INSERT INTO dateformula VALUES(#{dateId}, #{dateName}, #{adjustmentYear}, #{adjustmentMonth}, #{adjustmentDay})")
+	void insert(DateFormula formula);
 
 	/**
 	 * 日付計算式を更新
