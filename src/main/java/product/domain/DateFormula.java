@@ -3,6 +3,9 @@ package product.domain;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+/**
+ * 日付計算式を表現するオブジェクト
+ */
 public class DateFormula {
 
 	@NotBlank
