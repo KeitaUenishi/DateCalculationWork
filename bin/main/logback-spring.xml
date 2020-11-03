@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE logback>
+
+
+<configuration>
+	<!-- デフォルト設定読み込み -->
+	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+	<!-- 開発(dev)プロファイル環境用設定 -->
+	<springProfile name="dev">
+
+		<!-- 変数の設定 -->
+		<property name="logFilePath" value="C:/log/" />
+		<property name="logFileName" value="app" />
+	</springProfile>
+
+	<!-- 標準出力 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<target>System.out</target>
+		<encoder>
+			<charset>UTF-8</charset>
+			<!--level ロギングイベントのレベル -->
+			<!--message ロギングイベントに関連付けられたメッセージ -->
+			<pattern>%d{yyyy/MM/dd HH:mm:ss} %-5level[%thread] - %message%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- アプリケーションログ -->
+	<appender name="APPLICATION_LOG"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+		<!-- 出力先ファイルパス -->
+		<file>${logFilePath}${logFileName}.log</file>
+
+		<!-- ログのローテーション設定 -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- 日付が変わったら年月フォルダ内にzipファイルを作成 -->
+			<fileNamePattern>${logFilePath}/%d{yyyyMM,aux}/${logFileName}-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+			<!-- 最大30日間保存 -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%d{yyyy/MM/dd HH:mm:ss}%-5level[%thread] - %message%n</pattern>
+		</encoder>
+		</appender>
+
+		<!-- rootロガー、コンソールとアプリケーションログに出力する -->
+		<root level="INFO">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="APPLICATION_LOG" />
+
+		</root>
+
+</configuration>

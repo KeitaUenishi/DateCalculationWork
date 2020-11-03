@@ -23,6 +23,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.3'
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
 	runtimeOnly('mysql:mysql-connector-java')
 	runtimeOnly('com.h2database:h2')
 	compileOnly 'org.projectlombok:lombok'
