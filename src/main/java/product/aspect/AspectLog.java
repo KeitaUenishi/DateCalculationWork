@@ -1,4 +1,4 @@
-package product.aspect;
+/**package product.aspect;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -22,7 +22,7 @@ public class AspectLog {
 	 * @param jp JoinPoint -> 横断的な処理を埋め込むメソッドの情報
 	 *
 	 */
-
+/**
 	@Before(value = "execution(* product..*(..))")
 	public void beforeLog(JoinPoint jp) {
 		logger.info("[before aop]start" +
@@ -40,7 +40,7 @@ public class AspectLog {
 	 * @param rtn JoinPoint処理後の戻り値
 	 *
 	 */
-
+/**
 	@AfterReturning(value = "execution(* product..*(..))", returning = "rtn")
 	public void afterLog(JoinPoint jp, String rtn) {
 		logger.info("[afterReturning aop]end" +
@@ -50,3 +50,4 @@ public class AspectLog {
 	}
 
 }
+*/
