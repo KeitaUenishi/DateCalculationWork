@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import product.domain.DateFormula;
+import product.domain.SimulationForm;
 import product.service.CalculationServise;
 
 /*
@@ -46,7 +47,7 @@ public class RegisterController {
 		}
 
 		servise.register(form);
-		// model.addAttribute("simulationForm", new SimulationForm());
+		model.addAttribute("simulationForm", new SimulationForm());
 		return "simulation";
 
 	}

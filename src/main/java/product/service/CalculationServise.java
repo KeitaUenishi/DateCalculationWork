@@ -1,5 +1,7 @@
 package product.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,5 +67,27 @@ public class CalculationServise {
 	@Transactional
 	public void delete(String dateId) {
 		repository.deletePK(dateId);
+	}
+
+	/**
+	 * 日付計算を行う
+	 * 計算基準日をベースに、日付計算式の加減値に基づいて計算を行う。
+	 * 計算後の書式は「yyyyMMdd」の文字列となる。
+	 *
+	 * @param baseDate
+	 * @param formula
+	 * @return 計算結果
+	 */
+	public String calculate(String baseDate, DateFormula formula) {
+		/** LocalDate.parse(CharSequence text, DateTimeFormatter formatter)
+			特定のフォーマッタを使用して、テキスト文字列からLocalDateのインスタンスを取得します。
+		 *
+		 * 	DateTimeFormatter
+		 * 	日付/時間オブジェクトの出力および解析のためのフォーマッタ。
+		 */
+		LocalDate date = LocalDate.parse(baseDate, DateTimeFormatter.ofPattern("yyyyMMdd"));
+		LocalDate calculationDate = date.plusYears(formula.getAdjustmentYear()).plusMonths(formula.getAdjustmentMonth())
+				.plusDays(formula.getAdjustmentDay());
+		return calculationDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 	}
 }

@@ -44,7 +44,7 @@ public class Result {
 	 *
 	 * @return 計算結果
 	 */
-	public DateFormula geDateFormula() {
+	public DateFormula getFormula() {
 		return formula;
 	}
 

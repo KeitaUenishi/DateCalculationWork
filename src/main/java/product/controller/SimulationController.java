@@ -2,8 +2,6 @@ package product.controller;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +19,7 @@ import product.service.CalculationServise;
 @Controller
 public class SimulationController {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	// private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/** CalculationServiseに依存 */
 	@Autowired
@@ -32,8 +30,9 @@ public class SimulationController {
 	 * @param form 画面フォーム
 	 * @return 表示するテンプレート
 	 */
-	@GetMapping("/")
-	public String index(@ModelAttribute SimulationForm form) {
+	@GetMapping
+	public String index(
+			@ModelAttribute SimulationForm form) {
 		return "simulation";
 	}
 
@@ -48,13 +47,14 @@ public class SimulationController {
 	@PostMapping
 	public String simulation(@ModelAttribute @Validated SimulationForm form,
 			BindingResult bindingResult, Model model) {
+		System.out.println("hoooooo");
 		if (bindingResult.hasErrors()) {
 			return "simulation";
 		}
 
 		/**
 		 * SimulationForm型のインスタンスを作成
-		 * SimlationFormの引数にgetBaseDate「計算基準日」、servise.serch「日付計算式の一覧を全件検索して取得する」
+		 * SimlationFormの引数にgetBaseDate「計算基準日」、servise.search「日付計算式の一覧を全件検索して取得する」
 		 */
 		SimulationForm resultForm = new SimulationForm(form.getBaseDate(), servise.search());
 		List<Result> results = resultForm.getResults();
@@ -70,8 +70,7 @@ public class SimulationController {
 		model.addAttribute("results", results);
 
 		// dateformulaテーブルのデータをログに出力
-		logger.info("[dateformulaテーブルの中身]" + model.getAttribute("dateformula").toString());
-
+		// logger.info("[dateformulaテーブルの中身]" + model.getAttribute("dateformula").toString());
 		return "simulation";
 	}
 

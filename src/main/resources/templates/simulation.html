@@ -1,58 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>計算結果表示</title>
-<!-- 1.cssとjavascriptのファイルを読み込む -->
-			<link rel="stylesheet" href="/css/bootstrap.css" />
-    		<script src="/js/jquery.js"></script>
-    		<script src="/js/bootstrap.js"></script>
-</head>
-<body>
-	<section id="main-container" class="offset-sm-1 col-sm-9">
-	<h1>計算するよ～</h1>
-	<table class="table table-striped">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+		<title>計算結果表示</title>
+
+		<!-- 1.cssとjavascriptのファイルを読み込む -->
+		<link rel="stylesheet" href="/css/bootstrap.css" />
+		<script src="/js/jquery.js"></script>
+		<script src="/js/bootstrap.js"></script>
+	</head>
+
+	<body>
+		<form action="#" th:action="@{/}" method="post">
+			<section id="main-container" class="offset-sm-1 col-sm-9">
+				<h1>計算するよ～</h1>
+					<table class="table-striped">
 
 
-		<fieldset>
-		<legend>計算の基準となる日付を入力してください。</legend>
-					<div>
-						<input id="baseDate" type="text" placeholder="20181101"/>
+			<fieldset class="form-group">
+				<legend class="form-group">計算の基準となる日付を入力してください。</legend>
+					<div class="form-group">
+						<input id="baseDate" class="input" type="text" placeholder="20181101" th:field="${simulationForm.baseDate}"/>
+							<p class="text-danger" th:if="${#fields.hasErrors('simulationForm.baseDate')}" th:errors="${simulationForm.baseDate}" />
 					</div>
+						<button id="simulationButton" name="simulation" class="btn btn-primary pull-left">計算実行</button>
+					<a id="registerButton" class="btn btn-primary" href="register">新規登録</a>
+			</fieldset>
 
-		<button id="simulationButton" name="simulation" class="uk-button uk-button-default">計算実行</button>
-		<a id="registerButton" class="uk-button uk-button-default" href="register">新規登録</a>
+		</form>
+		<table class = "table">
+			<thead>
+				<tr>
+					<th>No.</th>
+					<th>日付ID</th>
+					<th>日付名</th>
+					<th>計算結果</th>
+					<th>計算式(年月日)</th>
+					<th>編集</th>
+				</tr>
+			</thead>
+		<tbody th:remove="all-but-first" th:each="dateFormula, stat : ${results}">
+			<tr>
+				<td th:text="${stat.count}">1</td>
+				<td th:id="${stat.count} + '_dateId'" th:text="${dateFormula.dateId}">abcde</td>
+				<td th:id="${stat.count} + '_dateName'" th:text="${dateFormula.dateName}">翌月末</td>
+				<td th:id="${stat.count} + '_calculated'" th:text="${dateFormula.calculated}">20181231</td>
+				<td th:id="${stat.count} + '_ymdFormula'" th:text="${dateFormula.ymdFormula}">0/1/99</td>
+				<td>
+					<a th:id="${stat.count} + '_updateButton'" class="uk-button uk-button-default" th:href="@{/update/{dateId}(dateId=${dateFormula.dateId})}">更新</a>
+					<form action="#" th:action="@{/{dateId}(dateId=${dateFormula.dateId})}" method="post">
+						<button th:id="${stat.count} + '_deleteButton'" name="delete" class="uk-button uk-button-danger">削除</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 
-		</fieldset>
-		<table>
-			    <thead>
-			        <tr>
-			            <th>No.</th>
-			            <th>日付ID</th>
-			            <th>日付名</th>
-			            <th>計算結果</th>
-			            <th>計算式(年月日)</th>
-			            <th>編集</th>
-			        </tr>
-			    </thead>
-			    <tbody th:remove="all-but-first" th:each="dateFormula, stat : ${results}">
-			        <tr>
-			            <td th:text="${stat.count}">1</td>
-			            <td th:id="${stat.count} + '_dateId'" th:text="${dateFormula.dateId}">abcde</td>
-			            <td th:id="${stat.count} + '_dateName'" th:text="${dateFormula.dateName}">翌月末</td>
-			            <td th:id="${stat.count} + '_calculated'" th:text="${dateFormula.calculated}">20181231</td>
-			            <td th:id="${stat.count} + '_ymdFormula'" th:text="${dateFormula.ymdFormula}">0/1/99</td>
-			            <td>
-			            	<a th:id="${stat.count} + '_updateButton'" class="uk-button uk-button-default" th:href="@{/update/{dateId}(dateId=${dateFormula.dateId})}">更新</a>
-			            	<form action="#" th:action="@{/{dateId}(dateId=${dateFormula.dateId})}" method="post">
-			            		<button th:id="${stat.count} + '_deleteButton'" name="delete" class="uk-button uk-button-danger">削除</button>
-			            	</form>
-			            </td>
-			        </tr>
-			    </tbody>
-			</table>
-
-</table>
+<Script src="dist/bandle.js"></Script>
 </section>
 </body>
 </html>
