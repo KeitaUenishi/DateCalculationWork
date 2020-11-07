@@ -39,6 +39,8 @@
 					<th>編集</th>
 				</tr>
 			</thead>
+			<!-- th:remove タグを削除する属性
+				タグ自身を削除したり、タグのボディー部を削除したりすることができる -->
 		<tbody th:remove="all-but-first" th:each="dateFormula, stat : ${results}">
 			<tr>
 				<td th:text="${stat.count}">1</td>

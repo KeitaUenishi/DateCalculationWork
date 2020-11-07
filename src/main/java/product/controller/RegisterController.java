@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import product.domain.DateFormula;
 import product.domain.SimulationForm;
-import product.service.CalculationServise;
+import product.service.CalculationService;
 
 /*
  * 日付計算式を新規登録する画面
@@ -24,7 +24,7 @@ public class RegisterController {
 
 	/** CalculationServiceに依存 */
 	@Autowired
-	private CalculationServise servise;
+	private CalculationService service;
 
 	@GetMapping
 	public String index(@ModelAttribute DateFormula form) {
@@ -41,15 +41,12 @@ public class RegisterController {
 	 */
 	@PostMapping
 	public String register(@ModelAttribute @Validated DateFormula form, BindingResult bindingResult, Model model) {
-
 		if (bindingResult.hasErrors()) {
 			return "register";
 		}
 
-		servise.register(form);
+		service.register(form);
 		model.addAttribute("simulationForm", new SimulationForm());
 		return "simulation";
-
 	}
-
 }

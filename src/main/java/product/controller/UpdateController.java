@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import product.domain.DateFormula;
 import product.domain.SimulationForm;
-import product.service.CalculationServise;
+import product.service.CalculationService;
 
 /**
  * 日付計算式を更新する画面に紐づくコントローラー
@@ -27,7 +27,7 @@ public class UpdateController {
 
 	/** 日付計算サービスに依存 */
 	@Autowired
-	private CalculationServise servise;
+	private CalculationService service;
 
 	/**
 	 * 初期表示処理を行う
@@ -38,7 +38,7 @@ public class UpdateController {
 	 */
 	@GetMapping
 	public String index(@PathVariable String dateId, Model model) {
-		model.addAttribute("dateFormula", servise.search(dateId));
+		model.addAttribute("dateFormula", service.search(dateId));
 		return "update";
 	}
 
@@ -62,7 +62,7 @@ public class UpdateController {
 		 * 第一引数にテンプレートから参照する変数名、第二引数にオブジェクト名として格納
 		 */
 
-		servise.update(form);
+		service.update(form);
 		model.addAttribute("simulationForm", new SimulationForm());
 		return "simulation";
 	}

@@ -22,10 +22,20 @@ public class DateFormula {
 
 	private int adjustmentDay;
 
+	/**
+	 * インスタンスの名前の出力
+	 * String型を返す 引数はない。メソッド内で加工する変数はない
+	 * @return
+	 */
 	public String getDateId() {
 		return dateId;
 	}
 
+	/**
+	 * インスタンスの名前の設定
+	 * 左のdateIdは、インスタンスの要素のひとつとしてのdateId
+	 * 右のdateIdは、「public void setDateId(String dateId)」の中のdateId
+	 */
 	public void setDateId(String dateId) {
 		this.dateId = dateId;
 	}

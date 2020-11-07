@@ -30,7 +30,7 @@ public class Result {
 	}
 
 	/** {@link DateFormula#getDateId()} */
-	public String getDateID() {
+	public String getDateId() {
 		return formula.getDateId();
 	}
 

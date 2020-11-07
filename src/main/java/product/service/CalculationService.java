@@ -19,7 +19,7 @@ import product.repository.DateFormulaRepository;
  */
 
 @Service
-public class CalculationServise {
+public class CalculationService {
 
 	/** 日付計算式リポジトリ */
 	@Autowired
