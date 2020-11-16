@@ -1,39 +1,62 @@
-plugins {
-	id 'org.springframework.boot' version '2.3.4.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
-	id 'java'
+
+//ビルドスクリプトの依存ライブラリの記述
+buildscript {
+	ext {
+		springBootVersion = '2.3.4.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
 }
+//plugin 先に誰かが作ったタスクの集まりを利用するためのもの
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+apply plugin: 'application'
 
 group = 'com.example.product'
 version = '1.0.0'
 sourceCompatibility = '11'
 
+mainClassName = 'product.Main'
+
+//起動可能なJarの定義
+bootJar {
+  baseName = "DateCalculation"
+  version =  "0.0.1-SNAPSHOT"
+}
+
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+	providedRuntime
 }
 
 repositories {
 	mavenCentral()
 }
 
+defaultTasks 'test'
+
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.3'
-	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
+	implementation('org.springframework.boot:spring-boot-starter-web')
+	implementation ('org.springframework.boot:spring-boot-starter-validation')
+	implementation('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.2')
 	runtimeOnly('mysql:mysql-connector-java')
 	runtimeOnly('com.h2database:h2')
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	testImplementation('org.mybatis.spring.boot:mybatis-spring-boot-starter-test:1.3.2')
+	testImplementation('com.codeborne:selenide:5.1.0')
 }
 
 test {
-	useJUnitPlatform()
+	include 'product/controller/*'
+	include 'product/repository/*'
+	include 'product/service/*'
+	exclude 'product/view/*'
 }
