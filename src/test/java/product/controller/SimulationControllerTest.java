@@ -1,4 +1,4 @@
-package com.example.product.controller;
+package product.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -15,12 +15,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import product.controller.SimulationController;
 import product.service.CalculationServise;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@TestPropertySource(locations = "classpath:test.propaties")
+@TestPropertySource(locations = "classpath:test.properties")
 public class SimulationControllerTest {
 
 	private MockMvc sut;
