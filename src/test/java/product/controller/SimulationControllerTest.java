@@ -50,7 +50,7 @@ public class SimulationControllerTest {
 	 * ・指定のViewを返すか？
 	 * .andExpect(view().name(テンプレート名))
 	 *
-	 * @throws Exception
+	 *
 	 */
 
 	@Test
@@ -62,12 +62,13 @@ public class SimulationControllerTest {
 
 	@Test
 	public void シミュレーションページで計算基準日を入力して計算実行を押すと計算サービスが呼ばれていること() throws Exception {
-		sut.perform(post("/").param("basedate", "20181201"))
+		// param("simulation.htmlから渡されるbaseDate", "入力された計算基準日")
+		sut.perform(post("/").param("baseDate", "20181201"))
 				.andExpect(status().isOk())
 				.andExpect(view().name("simulation"));
 
-		//verify(service, times(1)).search();
-		//System.out.println("servise.search()は1回呼ばれました");
+		System.out.println("service.search()は1回呼ばれました");
+		verify(service, times(1)).search();
 	}
 
 	@Test

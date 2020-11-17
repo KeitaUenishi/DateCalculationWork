@@ -77,6 +77,13 @@ public class CalculationService {
 	 * @param baseDate
 	 * @param formula
 	 * @return 計算結果
+	 *
+	 * 画面から受け取った8桁の数値(String)をLocalDate型に変換
+	 * plusYears LocalDateクラスにあるメソッド
+	 *
+	 * calculatedDate 日付計算された結果が代入された変数
+	 * parse 変換
+	 * format 指定した形式で表示させる
 	 */
 	public String calculate(String baseDate, DateFormula formula) {
 		/** LocalDate.parse(CharSequence text, DateTimeFormatter formatter)

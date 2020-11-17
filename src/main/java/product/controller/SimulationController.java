@@ -50,7 +50,7 @@ public class SimulationController {
 	public String simulation(
 			@ModelAttribute @Validated SimulationForm form,
 			BindingResult bindingResult, Model model) {
-		System.out.println("hoooooo");
+		//		System.out.println("hoooooo");
 		if (bindingResult.hasErrors()) {
 			return "simulation";
 		}
@@ -71,7 +71,7 @@ public class SimulationController {
 		 * 第一引数にテンプレートから参照する変数名、第二引数にオブジェクト名として格納
 		 */
 		model.addAttribute("results", results);
-		System.out.println(simulationForm.getBaseDate());
+		//		System.out.println(simulationForm.getBaseDate());
 		// dateformulaテーブルのデータをログに出力
 		// logger.info("[dateformulaテーブルの中身]" + model.getAttribute("dateformula").toString());
 		return "simulation";
