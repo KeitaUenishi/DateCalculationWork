@@ -55,11 +55,11 @@ public class SimulationPage {
 	}
 
 	public SelenideElement 検索結果() {
-		return $(By.cssSelector(".uk-table tbody"));
+		return $(By.cssSelector(".table tbody"));
 	}
 
 	public int 検索結果の件数() {
-		return $(By.cssSelector(".uk-table")).findElements(By.tagName("tbody")).size();
+		return $(By.cssSelector(".table")).findElements(By.tagName("tbody")).size();
 	}
 
 }

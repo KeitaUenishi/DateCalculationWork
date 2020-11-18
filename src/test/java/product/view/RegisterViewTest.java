@@ -1,7 +1,7 @@
 package product.view;
 
-import static com.codeborne.selenide.Condition.visible;
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.codeborne.selenide.Condition.*;
+import static org.assertj.core.api.Assertions.*;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -43,7 +43,7 @@ public class RegisterViewTest {
 	public void No1_新規登録画面からシミューレーション画面へ戻れる事() {
 		SimulationPage actual = page.シミュレーションページへ戻る();
 
-		assertThat(actual.title()).isEqualTo("計算結果確認");
+		assertThat(actual.title()).isEqualTo("計算結果表示");
 	}
 
 	@Test
